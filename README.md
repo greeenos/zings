@@ -17,9 +17,9 @@ It runs as one Docker container with PocketBase and SQLite: a **45 MB image** th
 
 ## Watch Zings in action
 
-https://github.com/user-attachments/assets/19184b00-2903-4aa7-8a2a-aa146f257fc2
+[![Play the 30-second Zings film](media/showreel-poster.jpg)](https://zings.vercel.app/#film)
 
-Task planning, shared projects and the mobile app in 30 seconds. [Download the film](https://github.com/greeenos/zings/raw/refs/heads/main/media/zings-showreel.mp4) · [English subtitles](media/zings-showreel.srt)
+Task planning, shared projects and the mobile app in 30 seconds. [Watch on the website](https://zings.vercel.app/#film) · [Download the film](https://github.com/greeenos/zings/raw/refs/heads/main/media/zings-showreel.mp4) · [English subtitles](media/zings-showreel.srt)
 
 ## Try the demo
 
