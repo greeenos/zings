@@ -1,0 +1,17 @@
+name: zings
+# Everything Zings needs — app, database, auth, realtime — in one container:
+#   docker compose up -d   →   http://localhost:8090
+services:
+  zings:
+    image: ghcr.io/greeenos/zings:latest
+    container_name: zings
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    environment:
+      # Your timezone; scheduled backups run at 03:00 local time.
+      TZ: Europe/Prague
+    volumes:
+      - zings:/pb/pb_data
+volumes:
+  zings:

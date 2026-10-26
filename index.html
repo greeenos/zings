@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Zings — Beautifully Simple To-Dos</title>
+    <meta name="description" content="Self-hosted tasks for your household. Plan your day, track focused work, and keep your notes private with Zings." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Zings" />
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#F7FAF8" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0C1110" media="(prefers-color-scheme: dark)">
+
+
+    <!-- Apply the saved theme before first paint to avoid a light/dark flash.
+         Mirrors the light/dark/auto logic in src/hooks/useTheme.ts. -->
+    <script>
+      (function () {
+        try {
+          var m = localStorage.getItem('things-theme');
+          if (m !== 'light' && m !== 'dark' && m !== 'auto') m = 'auto';
+          var dark = m === 'dark' || (m === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+name: Feature request
+description: Suggest a new feature or improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea! Before filing, please skim the [scope notes in the README](../../README.md) — Zings is intentionally kept small, so some features may be out of scope.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the user need, not the implementation.
+      placeholder: "When I'm planning my week, I can't ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      placeholder: I'd like Zings to ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Workarounds you've tried, or other approaches you thought about.
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Does this fit Zings' scope?
+      description: Honest gut check — Zings stays close to Things 3's core flow.
+      options:
+        - "Yes, it's a refinement of an existing feature"
+        - "Maybe — I'd like to discuss"
+        - "I know it's a stretch, but hear me out"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I've searched existing issues and discussions for similar requests
+          required: true

@@ -1,0 +1,42 @@
+# A paid, public Zings: free plan with limits, Pro by card (Stripe) or crypto
+# (NOWPayments). Fill in .env.hosted (variables below), then:
+#   docker compose -f docker-compose.hosted.yml --env-file .env.hosted up -d
+services:
+  zings:
+    image: ghcr.io/greeenos/zings:latest
+    container_name: zings-cloud
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-Europe/Prague}
+      ZINGS_HOSTED: "1"
+      ZINGS_APP_URL: ${ZINGS_APP_URL}          # https://zings.example.com, for payment redirects
+      ZINGS_MAX_USERS: ${ZINGS_MAX_USERS:-0}   # 0 = no cap
+      ZINGS_FREE_TODO_LIMIT: ${ZINGS_FREE_TODO_LIMIT:-100}
+      ZINGS_PRICE_MONTH_EUR: ${ZINGS_PRICE_MONTH_EUR:-2}
+      ZINGS_PRICE_YEAR_EUR: ${ZINGS_PRICE_YEAR_EUR:-20}
+      ZINGS_PUSH_CONTACT: ${ZINGS_PUSH_CONTACT}
+      # Pro includes AI on this key (users can still bring their own).
+      ZINGS_AI_KEY: ${ZINGS_AI_KEY}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      STRIPE_PRICE_MONTH: ${STRIPE_PRICE_MONTH}
+      STRIPE_PRICE_YEAR: ${STRIPE_PRICE_YEAR}
+      NOWPAYMENTS_API_KEY: ${NOWPAYMENTS_API_KEY}
+      NOWPAYMENTS_IPN_SECRET: ${NOWPAYMENTS_IPN_SECRET}
+    volumes:
+      - zings-cloud:/pb/pb_data
+    # Not published: the tunnel below is the only way in.
+
+  # Cloudflare Tunnel: public HTTPS without opening a port on the home router.
+  # Create the tunnel in the Cloudflare dashboard (Zero Trust → Networks →
+  # Tunnels), point its public hostname at http://zings:8090, and paste the token.
+  tunnel:
+    image: cloudflare/cloudflared:2026.9.0
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on: [zings]
+
+volumes:
+  zings-cloud:

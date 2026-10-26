@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & ideas
+    url: https://github.com/greeenos/zings/discussions
+    about: For open-ended questions, setup help, or feature brainstorming, please use Discussions instead of opening an issue.
+  - name: Hosted version interest
+    url: https://github.com/greeenos/zings/issues/new?labels=hosted-version&title=Interested+in+hosted+Zings
+    about: Interested in a managed cloud version of Zings? Let me know — it directly shapes whether I build it.
+  - name: Security vulnerability
+    url: https://github.com/greeenos/zings/security/advisories/new
+    about: Please report security issues privately, not as public issues.

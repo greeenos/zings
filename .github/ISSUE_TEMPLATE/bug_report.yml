@@ -1,0 +1,100 @@
+name: Bug report
+description: Something in Zings isn't working as expected
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill in as much as you can — it really helps.
+
+        **Not a bug?** For questions or ideas, use [Discussions](https://github.com/greeenos/zings/discussions) instead.
+        **Security issue?** Please follow the [security policy](../../SECURITY.md) and report privately.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+      placeholder: When I click X, Y happens instead of Z.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: How can someone else trigger this bug?
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: I expected ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Zings version / commit
+      description: Docker tag, release version, or commit SHA
+      placeholder: "v0.1.0 or commit abc1234"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: How are you running Zings?
+      options:
+        - Self-hosted via Docker (docker-compose)
+        - Self-hosted, building from source
+        - Local development (bun run dev)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & OS
+      placeholder: "Firefox 128 on Linux, Safari on iOS 17, etc."
+    validations:
+      required: true
+
+  - type: textarea
+    id: setup
+    attributes:
+      label: Zings version
+      description: Docker image tag, or the commit you built from
+      placeholder: "ghcr.io/greeenos/zings:latest (pulled 2026-10-24)"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / console output
+      description: Paste any relevant browser console errors or container logs. Please redact secrets.
+      render: shell
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Drag images here if relevant.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I've searched existing issues and this isn't a duplicate
+          required: true
+        - label: I'm on the latest release / `main`
+          required: true

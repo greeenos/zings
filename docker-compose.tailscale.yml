@@ -1,0 +1,44 @@
+name: zings
+# Zings on your Tailscale network with real HTTPS — installable as an app, with
+# reminders and note encryption — reachable only by your own devices:
+#
+#   TS_AUTHKEY=tskey-auth-... docker compose -f docker-compose.tailscale.yml up -d
+#   → https://zings.<your-tailnet>.ts.net
+#
+# Needs MagicDNS and HTTPS Certificates turned on in the Tailscale admin console
+# (DNS page). Make the auth key at https://login.tailscale.com/admin/settings/keys
+services:
+  tailscale:
+    image: tailscale/tailscale:v1.102.5
+    hostname: zings
+    restart: unless-stopped
+    environment:
+      TS_AUTHKEY: ${TS_AUTHKEY:?set TS_AUTHKEY to a Tailscale auth key}
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_SERVE_CONFIG: /config/serve.json
+    configs:
+      - source: serve
+        target: /config/serve.json
+    volumes:
+      - tailscale:/var/lib/tailscale
+
+  zings:
+    image: ghcr.io/greeenos/zings:latest
+    restart: unless-stopped
+    # Shares the tailscale container's network: no ports on the host at all.
+    network_mode: service:tailscale
+    environment:
+      TZ: Europe/Prague
+    volumes:
+      - zings:/pb/pb_data
+
+configs:
+  serve:
+    # Tailscale terminates HTTPS with a Let's Encrypt cert for the machine name.
+    content: |
+      {"TCP": {"443": {"HTTPS": true}},
+       "Web": {"$${TS_CERT_DOMAIN}:443": {"Handlers": {"/": {"Proxy": "http://127.0.0.1:8090"}}}}}
+
+volumes:
+  tailscale:
+  zings:

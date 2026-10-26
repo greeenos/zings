@@ -1,0 +1,59 @@
+1
+00:00:00,500 --> 00:00:01,660
+Meet Zings!
+
+2
+00:00:01,780 --> 00:00:03,620
+Your tasks on any device,
+
+3
+00:00:03,740 --> 00:00:05,313
+with nothing to download.
+
+4
+00:00:05,433 --> 00:00:07,393
+Just type it the way you'd say it.
+
+5
+00:00:07,513 --> 00:00:11,573
+Dates, times and priority are picked up for you.
+
+6
+00:00:11,917 --> 00:00:14,497
+Done? Check it off and move on.
+
+7
+00:00:14,617 --> 00:00:18,880
+Notes, steps and deadlines stay with every task.
+
+8
+00:00:19,000 --> 00:00:22,900
+Your plan and your calendar, side by side.
+
+9
+00:00:23,367 --> 00:00:27,507
+Share a project and plan it together, live.
+
+10
+00:00:29,133 --> 00:00:29,973
+On your phone,
+
+11
+00:00:30,093 --> 00:00:33,333
+just open it in the browser and add it to your home screen.
+
+12
+00:00:33,453 --> 00:00:35,313
+No app store needed.
+
+13
+00:00:35,433 --> 00:00:37,873
+And 25+ more features,
+
+14
+00:00:37,993 --> 00:00:41,947
+from recurring tasks to reminders and offline mode.
+
+15
+00:00:42,067 --> 00:00:45,647
+Zings. Free and open source.

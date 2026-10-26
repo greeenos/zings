@@ -1,0 +1,57 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env
+.env.local
+.env.*.local
+docs/*
+!docs/user-guide.md
+.claude/
+docker-compose.override.yml
+
+# Host-specific systemd unit (contains local paths / user)
+docker/*.service
+
+
+# PocketBase: local data and build output
+/pb_data/
+/pb_public/
+/pb_hooks/zings.js
+
+# Leftover Supabase volume on old installs
+/volumes/
+
+# Vercel website builds and local deployment credentials
+web-dist/
+.vercel/
+
+# Private production and marketing material
+/tools/media/
+/media/BRAND.md
+/media/README.md
+/media/press-kit.md
+/media/*.chapters.json
+
+.vercel
+.env*

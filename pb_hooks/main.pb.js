@@ -1,0 +1,35 @@
+/// <reference path="../pb_data/types.d.ts" />
+
+// Handlers live in zings.js, built from server/ by `npm run build`.
+routerAdd("GET", "/api/feed.ics", (e) => require(`${__hooks}/zings.js`).feed(e));
+routerAdd("GET", "/api/push/key", (e) => require(`${__hooks}/zings.js`).pushKey(e));
+routerAdd("POST", "/api/push/inbox", (e) => require(`${__hooks}/zings.js`).pushInbox(e));
+onRecordCreateRequest((e) => require(`${__hooks}/zings.js`).limitUsers(e), "users");
+onRecordCreateRequest((e) => require(`${__hooks}/zings.js`).replaceSubscription(e), "push_subscriptions");
+cronAdd("zingsReminders", "* * * * *", () => require(`${__hooks}/zings.js`).sendReminders());
+cronAdd("zingsPruneOutbox", "17 4 * * *", () => require(`${__hooks}/zings.js`).pruneOutbox());
+routerAdd("GET", "/api/share/members", (e) => require(`${__hooks}/zings.js`).shareMembers(e), $apis.requireAuth());
+routerAdd("POST", "/api/share/invite", (e) => require(`${__hooks}/zings.js`).shareInvite(e), $apis.requireAuth());
+routerAdd("POST", "/api/share/remove", (e) => require(`${__hooks}/zings.js`).shareRemove(e), $apis.requireAuth());
+onRecordAfterCreateSuccess((e) => require(`${__hooks}/zings.js`).announceSharedTodo(e), "todos");
+routerAdd("GET", "/api/v1/todos", (e) => require(`${__hooks}/zings.js`).apiList(e));
+routerAdd("POST", "/api/v1/todos", (e) => require(`${__hooks}/zings.js`).apiCreate(e));
+routerAdd("POST", "/api/v1/todos/{id}/complete", (e) => require(`${__hooks}/zings.js`).apiComplete(e));
+routerAdd("POST", "/api/inbound/email/{token}", (e) => require(`${__hooks}/zings.js`).inboundEmail(e));
+routerAdd("GET", "/api/calendar/events", (e) => require(`${__hooks}/zings.js`).calendarEvents(e), $apis.requireAuth());
+onRecordAfterCreateSuccess((e) => require(`${__hooks}/zings.js`).webhookCreated(e), "todos");
+onRecordAfterUpdateSuccess((e) => require(`${__hooks}/zings.js`).webhookUpdated(e), "todos");
+routerAdd("POST", "/api/ai/key", (e) => require(`${__hooks}/zings.js`).saveAiKey(e), $apis.requireAuth());
+routerAdd("POST", "/api/ai/breakdown", (e) => require(`${__hooks}/zings.js`).aiBreakdown(e), $apis.requireAuth());
+routerAdd("POST", "/api/ai/capture", (e) => require(`${__hooks}/zings.js`).aiCapture(e), $apis.requireAuth());
+onRecordCreateRequest((e) => require(`${__hooks}/zings.js`).guardTodoCreate(e), "todos");
+onRecordUpdateRequest((e) => require(`${__hooks}/zings.js`).guardAttachments(e), "todos");
+onRecordCreateRequest((e) => require(`${__hooks}/zings.js`).protectBilling(e), "users");
+onRecordUpdateRequest((e) => require(`${__hooks}/zings.js`).protectBilling(e), "users");
+routerAdd("GET", "/api/billing/status", (e) => require(`${__hooks}/zings.js`).billingStatus(e), $apis.requireAuth());
+routerAdd("POST", "/api/billing/stripe/checkout", (e) => require(`${__hooks}/zings.js`).stripeCheckout(e), $apis.requireAuth());
+routerAdd("POST", "/api/billing/stripe/portal", (e) => require(`${__hooks}/zings.js`).stripePortal(e), $apis.requireAuth());
+routerAdd("POST", "/api/billing/stripe/webhook", (e) => require(`${__hooks}/zings.js`).stripeWebhook(e));
+routerAdd("POST", "/api/billing/crypto/invoice", (e) => require(`${__hooks}/zings.js`).cryptoInvoice(e), $apis.requireAuth());
+routerAdd("POST", "/api/billing/crypto/ipn", (e) => require(`${__hooks}/zings.js`).cryptoIpn(e));
+cronAdd("zingsRenewals", "0 9 * * *", () => require(`${__hooks}/zings.js`).renewalReminders());
